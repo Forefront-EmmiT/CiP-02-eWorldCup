@@ -1,6 +1,6 @@
-// import { render, screen, fireEvent } from '@testing-library/react';
-// import { describe, it, expect } from 'vitest';
-// import App from '../App';
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import App from '../App';
 
 // describe('App', () => {
 //   it('renders Vite + React heading', () => {
@@ -35,3 +35,11 @@
 //     expect(reactLogo).toBeInTheDocument();
 //   });
 // });
+
+describe('App', () => {
+    it('should show "Alice vs Charlie" when n=6 and d=2', () => {
+        render(<App />);
+        
+        expect(screen.getByText('Alice vs Charlie')).toBeTruthy()
+    });
+});
