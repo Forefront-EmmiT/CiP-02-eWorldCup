@@ -6,7 +6,7 @@ const FormComponent = () => {
     const [participants, setParticipants] = useState<string>('');
     const [rounds, setRounds] = useState<string>('');
 
-    function handleForm(e: React.FormEvent) {
+    function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
     
         const n = Number(participants);
@@ -21,8 +21,8 @@ const FormComponent = () => {
 
     return (
         <>
-            <form id="input-form" className="input-form" onSubmit={handleForm}>
-                <label htmlFor="participant">Participants (must be even number)</label>
+            <form id="input-form" className="input-form" onSubmit={handleSubmit}>
+                <label htmlFor="participant">Participants (must be even number)*</label>
                 <input 
                     type="number" 
                     id="participant" 
@@ -30,7 +30,7 @@ const FormComponent = () => {
                     onChange={(e) => setParticipants(e.target.value)}
                     required
                 />
-                <label htmlFor="rounds">Tournament Rounds</label>
+                <label htmlFor="rounds">Tournament Rounds*</label>
                 <input 
                     type="number" 
                     id="rounds"
