@@ -23,7 +23,7 @@ export const validateFormInput = (
 
   if (d >= n - 1) {
     return {
-        isValid: false;
+        isValid: false,
         errorMsg: 'Round must be less than number of players'
     }
   }
