@@ -2,24 +2,24 @@ import { useState } from 'react';
 import './FormComponent.scss'
 
 const FormComponent = () => {
-    const [participants, setParticipants] = useState<string>('');
+    const [players, setplayers] = useState<string>('');
     const [rounds, setRounds] = useState<string>('');
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
     
-        const n = Number(participants);
+        const n = Number(players);
         const d = Number(rounds);
         
         if (n % 2 === 0 && d >= 1 && d <= n - 1) {
             roundRobin(n, d)
         } else {
-            console.log("Praticipants must be even number and rounds lesser than participants")
+            console.log("Praticipants must be even number and rounds lesser than players")
         }
     }
 
     function roundRobin(n, d) {
-        const participants = [
+        const players = [
             { id: 1, name: "Alice" },
             { id: 2, name: "Bob" },
             { id: 3, name: "Charlie" },
@@ -49,34 +49,37 @@ const FormComponent = () => {
 
             const pair = []
 
-            pair.push([0, (r % (n - 1) + 1)])
+            pair.push(players[0].name + ' vs. ' + players[(r % (n - 1) + 1)].name)
 
-            for(let i = 1; i < (n / 2); i++) {
-                const firstPlayer = (r + i) % (n - 1) + 1;
-                const secondPlayer = (r + n - i - 1) % (n - 1) + 1;
+            for(let i = 1; i < n / 2; i++) {
+                const firstPlayer = players[(r + i) % (n - 1) + 1];
+                const secondPlayer = players[(r + n - i - 1) % (n - 1) + 1];
 
-                pair.push([firstPlayer, secondPlayer])
+                pair.push(firstPlayer.name + ' vs. ' + secondPlayer.name)
             }
 
             pairs.push(pair)
         }
 
-        console.log(pairs)
+        pairs[d - 1].forEach(match => {
+            console.log(match)
+        })
+
     }
 
 
     return (
         <>
             <form id="input-form" className="input-form" onSubmit={handleSubmit}>
-                <label htmlFor="participant">Participants (must be even number)*</label>
+                <label htmlFor="player">Players (must be even number)*</label>
                 <input 
                     type="number" 
-                    id="participant" 
-                    value={participants}
-                    onChange={(e) => setParticipants(e.target.value)}
+                    id="player" 
+                    value={players}
+                    onChange={(e) => setplayers(e.target.value)}
                     required
                 />
-                <label htmlFor="rounds">Tournament Rounds (must be at least 1 and lesser than participants)*</label>
+                <label htmlFor="rounds">Tournament Rounds (must be at least 1 and lesser than players)*</label>
                 <input 
                     type="number" 
                     id="rounds"
