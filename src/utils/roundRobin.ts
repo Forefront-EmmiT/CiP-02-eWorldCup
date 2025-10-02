@@ -1,14 +1,4 @@
-import type { Player } from '../types/types';
-
-interface Match {
-  playerOne: string;
-  playerTwo: string;
-}
-
-interface Round {
-  roundNumber: number;
-  matches: Match[];
-}
+import type { Player, Round, Match } from '../types/types';
 
 export function roundRobin(n: number, d: number, playerData: Player[]) {
   const players: Player[] = playerData;
