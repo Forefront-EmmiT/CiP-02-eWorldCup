@@ -17,11 +17,12 @@ const FormComponent = () => {
     const n = Number(players);
     const d = Number(rounds);
 
-    if (n % 2 === 0 && d >= 1 && d <= n - 1) {
+    if (n % 2 === 0 && d >= 1 && d <= n - 1 && n <= data.length) {
       roundRobin(n, d, data);
     } else {
       console.log(
-        'Praticipants must be even number and rounds lesser than players'
+        'Praticipants must be even number and rounds lesser than players',
+        data.length
       );
     }
   }
