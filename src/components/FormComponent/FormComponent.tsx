@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import './FormComponent.scss'
 
+interface Player {
+    id: number;
+    name: string;
+}
+
 const FormComponent = () => {
     const [players, setplayers] = useState<string>('');
     const [rounds, setRounds] = useState<string>('');
@@ -18,8 +23,8 @@ const FormComponent = () => {
         }
     }
 
-    function roundRobin(n, d) {
-        const players = [
+    function roundRobin(n: number, d: number) {
+        const players: Player[] = [
             { id: 1, name: "Alice" },
             { id: 2, name: "Bob" },
             { id: 3, name: "Charlie" },
@@ -43,17 +48,17 @@ const FormComponent = () => {
         ];
 
         // fixera spelare [0] och rotera övriga 
-        const pairs = []
+        const pairs: string[][] = []
 
         for(let r = 0; r < n - 1; r++) {
 
-            const pair = []
+            const pair: string[] = []
 
             pair.push(players[0].name + ' vs. ' + players[(r % (n - 1) + 1)].name)
 
             for(let i = 1; i < n / 2; i++) {
-                const firstPlayer = players[(r + i) % (n - 1) + 1];
-                const secondPlayer = players[(r + n - i - 1) % (n - 1) + 1];
+                const firstPlayer: Player = players[(r + i) % (n - 1) + 1];
+                const secondPlayer: Player = players[(r + n - i - 1) % (n - 1) + 1];
 
                 pair.push(firstPlayer.name + ' vs. ' + secondPlayer.name)
             }
