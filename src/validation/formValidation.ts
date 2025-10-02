@@ -1,4 +1,4 @@
-import type { ValidationResult } from '../types/types'
+import type { ValidationResult } from '../types/types';
 
 export const validateFormInput = (
   n: number,
@@ -14,24 +14,24 @@ export const validateFormInput = (
 
   if (d < 1) {
     return {
-        isValid: false,
-        errorMsg: 'Round must be at least 1'
-    }
+      isValid: false,
+      errorMsg: 'Round must be at least 1',
+    };
   }
 
-  if (d >= n - 1) {
+  if (d > n - 1) {
     return {
-        isValid: false,
-        errorMsg: 'Round must be less than number of players'
-    }
+      isValid: false,
+      errorMsg: 'Round must be less than number of players',
+    };
   }
 
   if (n > maxPlayers) {
     return {
-        isValid: false,
-        errorMsg: `Maximum ${maxPlayers} players allowed`
-    }
+      isValid: false,
+      errorMsg: `Maximum ${maxPlayers} players allowed`,
+    };
   }
 
-  return { isValid: true};
+  return { isValid: true };
 };
