@@ -12,8 +12,6 @@ export const validateFormInput = (
     };
   }
 
-  // Är runder färre än antal deltagare?
-
   if (d < 1) {
     return {
         isValid: false,
@@ -27,8 +25,6 @@ export const validateFormInput = (
         errorMsg: 'Round must be less than number of players'
     }
   }
-
-  // Är antalet deltager per rund inom spannet av deltagare som anmält sig
 
   if (n > maxPlayers) {
     return {

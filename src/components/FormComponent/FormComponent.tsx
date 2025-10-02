@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './FormComponent.scss';
 import data from '../../data/participantsList.json';
+import { validateFormInput } from '../../validation/formValidation';
 
 interface Player {
   id: number;
@@ -17,13 +18,12 @@ const FormComponent = () => {
     const n = Number(players);
     const d = Number(rounds);
 
-    if (n % 2 === 0 && d >= 1 && d <= n - 1 && n <= data.length) {
+    const validation = validateFormInput(n, d, data.length);
+
+    if (validation.isValid) {
       roundRobin(n, d, data);
     } else {
-      console.log(
-        'Praticipants must be even number and rounds lesser than players',
-        data.length
-      );
+      console.log(validation.errorMsg);
     }
   }
 
