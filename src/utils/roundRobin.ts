@@ -1,26 +1,42 @@
-import type { Player } from "../types/types";
+import type { Player } from '../types/types';
+
+interface Match {
+  playerOne: string;
+  playerTwo: string;
+}
+
+interface Round {
+  roundNumber: number;
+  matches: Match[];
+}
 
 export function roundRobin(n: number, d: number, playerData: Player[]) {
   const players: Player[] = playerData;
-
-  const pairs: string[][] = [];
+  const allRounds: Round[] = [];
 
   for (let r = 0; r < n - 1; r++) {
-    const pair: string[] = [];
+    const matches: Match[] = [];
 
-    pair.push(players[0].name + ' vs. ' + players[(r % (n - 1)) + 1].name);
+    matches.push({
+      playerOne: players[0].name,
+      playerTwo: players[(r % (n - 1)) + 1].name,
+    });
 
     for (let i = 1; i < n / 2; i++) {
-      const firstPlayer: Player = players[((r + i) % (n - 1)) + 1];
-      const secondPlayer: Player = players[((r + n - i - 1) % (n - 1)) + 1];
+      const firstPlayer = players[((r + i) % (n - 1)) + 1].name;
+      const secondPlayer = players[((r + n - i - 1) % (n - 1)) + 1].name;
 
-      pair.push(firstPlayer.name + ' vs. ' + secondPlayer.name);
+      matches.push({
+        playerOne: firstPlayer,
+        playerTwo: secondPlayer,
+      });
     }
 
-    pairs.push(pair);
+    allRounds.push({
+      roundNumber: r + 1,
+      matches: matches,
+    });
   }
 
-  pairs[d - 1].forEach(match => {
-    console.log(match);
-  });
+  return allRounds[d - 1].matches;
 }

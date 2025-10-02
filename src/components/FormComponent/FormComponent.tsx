@@ -17,7 +17,8 @@ const FormComponent = () => {
     const validation = validateFormInput(n, d, data.length);
 
     if (validation.isValid) {
-      roundRobin(n, d, data);
+      const matches = roundRobin(n, d, data);
+      console.log(matches);
     } else {
       console.log(validation.errorMsg);
     }
