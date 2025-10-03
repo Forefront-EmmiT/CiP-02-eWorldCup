@@ -28,5 +28,5 @@ export function roundRobin(n: number, d: number, playerData: Player[]) {
     });
   }
 
-  return allRounds[d - 1].matches;
+  return allRounds[d - 1];
 }

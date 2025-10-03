@@ -3,6 +3,7 @@ import './FormComponent.scss';
 import data from '../../data/participantsList.json';
 import { validateFormInput } from '../../validation/formValidation';
 import { roundRobin } from '../../utils/roundRobin';
+import { formatRound } from '../../utils/formatRound';
 
 const FormComponent = () => {
   const [players, setplayers] = useState<string>('');
@@ -17,7 +18,10 @@ const FormComponent = () => {
     const validation = validateFormInput(n, d, data.length);
 
     if (validation.isValid) {
-      roundRobin(n, d, data);
+      const round = roundRobin(n, d, data);
+      round.matches.forEach(match => {
+        console.log(formatRound(match));
+      });
     } else {
       console.log(validation.errorMsg);
     }
