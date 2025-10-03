@@ -30,20 +30,22 @@ const FormComponent = () => {
   return (
     <>
       <form id="input-form" className="input-form" onSubmit={handleSubmit}>
-        <label htmlFor="player">Players (must be even number)*</label>
+        <label htmlFor="playerInput">Players (must be even number)*</label>
         <input
           type="number"
-          id="player"
+          id="playerInput"
+          data-testid="players-input"
           value={players}
           onChange={e => setplayers(e.target.value)}
           required
         />
-        <label htmlFor="rounds">
+        <label htmlFor="roundsInput">
           Tournament Rounds (must be at least 1 and lesser than players)*
         </label>
         <input
           type="number"
-          id="rounds"
+          id="roundsInput"
+          data-testid="rounds-input"
           value={rounds}
           onChange={e => setRounds(e.target.value)}
           required
