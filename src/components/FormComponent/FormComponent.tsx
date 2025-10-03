@@ -3,11 +3,13 @@ import './FormComponent.scss';
 import data from '../../data/participantsList.json';
 import { validateFormInput } from '../../validation/formValidation';
 import { roundRobin } from '../../utils/roundRobin';
-import { formatRound } from '../../utils/formatRound';
+import { ResultComponent } from '../ResultComponent/ResultComponent';
+import type { Match } from '../../types/types'
 
 const FormComponent = () => {
   const [players, setplayers] = useState<string>('');
   const [rounds, setRounds] = useState<string>('');
+  const [currentRound, setCurrentRound] = useState<Match[]>([]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -19,9 +21,7 @@ const FormComponent = () => {
 
     if (validation.isValid) {
       const round = roundRobin(n, d, data);
-      round.matches.forEach(match => {
-        console.log(formatRound(match));
-      });
+      setCurrentRound(round.matches)
     } else {
       console.log(validation.errorMsg);
     }
@@ -50,6 +50,10 @@ const FormComponent = () => {
         />
         <button type="submit">Submit</button>
       </form>
+
+      {currentRound.length > 0 && (
+        <ResultComponent matches={currentRound} />
+      )}
     </>
   );
 };
